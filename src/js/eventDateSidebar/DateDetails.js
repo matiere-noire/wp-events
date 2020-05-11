@@ -21,7 +21,7 @@ class DateDetails extends Component {
     const place = allPlaces.find(p => p.value === Number(date.place))
 
     return (
-      <PanelBody title={`${date.startDate.toLocaleDateString()} #${date.id}`}>
+      <PanelBody title={`${date.startDate.toLocaleDateString()} #${date.id}`} initialOpen={false}>
         <PanelRow>
           {`${date.startDate.toLocaleDateString()} : `}
           {`${date.startDate.getHours()}h${date.startDate.getMinutes()} => ${date.endDate.getHours()}h${date.endDate.getMinutes()}`}
