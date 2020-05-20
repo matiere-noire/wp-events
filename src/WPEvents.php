@@ -2,10 +2,9 @@
 
 namespace Events;
 
-require_once 'includes/class-wp-wpe-storage.php';
-require_once 'includes/class-wp-wpe-query.php';
-require_once 'includes/class-wp-wpe-rest-dates.php';
-require_once 'includes/date.php';
+use Events\Classes\WPEventsDB;
+use Events\Rest\RestDates;
+
 
 class WPEvents
 {
@@ -15,6 +14,10 @@ class WPEvents
     private $path;
     private $url;
     private $slug;
+    /**
+     * @var string
+     */
+    private $normalizeName;
 
     public function __construct()
     {
@@ -25,7 +28,7 @@ class WPEvents
     {
 
         $this->name     = __('WP Events');
-        $this->normalizename = htmlspecialchars( strtolower( $this->name ) );
+        $this->normalizeName = htmlspecialchars( strtolower( $this->name ) );
         $this->basename = plugin_basename( $file );
         $this->path     = plugin_dir_path( $file );
         $this->url      = plugin_dir_url( $file );
@@ -45,7 +48,7 @@ class WPEvents
     }
 
     public function register_routes(){
-        $wpeRoutes = new WP_Events_Rest_Dates();
+        $wpeRoutes = new RestDates();
         $wpeRoutes->initialize();
     }
 
@@ -73,7 +76,7 @@ class WPEvents
      * Fire only once, when plugin is activated
      */
     public function plugin_activate(){
-        $mnemStorage = new WP_Events_Storage();
+        $mnemStorage = new WPEventsDB();
         $mnemStorage->initialize();
     }
 
@@ -84,7 +87,7 @@ class WPEvents
      */
     public function admin_menu_entry(){
 
-        add_menu_page(  $this->name, $this->name, 'administrator', $this->normalizename, array( $this, 'admin_menu_entry_dashboard' ), 'dashicons-calendar-alt', 26 );
+        add_menu_page(  $this->name, $this->name, 'administrator', $this->normalizeName, array( $this, 'admin_menu_entry_dashboard' ), 'dashicons-calendar-alt', 26 );
 
     }
 
@@ -92,7 +95,7 @@ class WPEvents
      * Display settings on a dashboard page
      */
     public function admin_menu_entry_dashboard(){
-        require_once "{$this->url}/src/includes/dashboard.php";
+        require_once "{$this->path}/src/includes/dashboard.php";
     }
 
 
