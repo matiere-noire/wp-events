@@ -1,12 +1,14 @@
 <?php
 
-namespace Events;
+namespace Events\Rest;
 
+use Events\Classes\WPEventsQuery;
 use WP_REST_request;
 use WP_REST_Response;
 use WP_Error;
+use WP_Post;
 
-class WP_Events_Rest_Dates{
+class RestDates{
 
     /**
 	 * Post type.
@@ -70,7 +72,7 @@ class WP_Events_Rest_Dates{
      */
     public function get_dates(){
         $query_args = array();
-        $dates = new WP_Events_Query;
+        $dates = new WPEventsQuery();
     
         return $dates->query( $query_args );
     }
@@ -104,8 +106,10 @@ class WP_Events_Rest_Dates{
 
     /**
      * Get all dates for one event
+     * @param WP_REST_request $request
+     * @return WP_Post|mixed|WP_Error|\WP_HTTP_Response|WP_REST_Response
      */
-    public function get_date( \WP_REST_request $request ){   
+    public function get_date( WP_REST_request $request ){
         $post = $this->get_event( $request['id'] );
         
         if ( is_wp_error( $post ) ) {
@@ -114,7 +118,7 @@ class WP_Events_Rest_Dates{
 
         $query_args = array( 'id' => $request['id'] );
 
-        $dates = new WP_Events_Query;
+        $dates = new WPEventsQuery();
 
         return rest_ensure_response( $dates->query( $query_args ) );
     }

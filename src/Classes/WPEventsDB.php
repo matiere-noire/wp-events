@@ -1,8 +1,8 @@
 <?php
 
-namespace Events;
+namespace Events\Classes;
 
-class WP_Events_Storage
+class WPEventsDB
 {
 
     public function __construct(){

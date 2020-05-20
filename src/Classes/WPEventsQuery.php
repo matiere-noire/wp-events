@@ -5,10 +5,11 @@
  * File: wp-includes/class-wp-query.php
  */
 
-namespace Events;
+namespace Events\Classes;
 
+use WP_Post;
 
-class WP_EVENTS_Query{
+class WPEventsQuery{
 
     /**
 	 * Query vars set by the user
