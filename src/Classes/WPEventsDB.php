@@ -7,13 +7,13 @@ class WPEventsDB
 
     public function __construct(){
         // NULL
+        $this->register_table( 'wpe_dates' );
     }
 
     public function initialize(){
         global $wpdb;
 
         // Add table to register dates from events
-        $this->register_table( 'wpe_dates' );
         $this->install_table( 'wpe_dates', "
             wpe_date_id bigint(20) unsigned NOT NULL auto_increment,
             wpe_date_start datetime NOT NULL,

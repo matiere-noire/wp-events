@@ -1,1 +1,1 @@
-import './eventDateSidebar/index'
+import './eventDate/index'

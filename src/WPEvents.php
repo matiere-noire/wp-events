@@ -18,6 +18,10 @@ class WPEvents
      * @var string
      */
     private $normalizeName;
+    /**
+     * @var WPEventsDB
+     */
+    private $eventDBClass;
 
     public function __construct()
     {
@@ -36,6 +40,7 @@ class WPEvents
 
         $this->register_cpts();
         $this->register_routes();
+        $this->eventDBClass = new WPEventsDB();
 
         add_action( 'init', array( $this, 'register_scripts') );
         add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets') );
@@ -57,7 +62,7 @@ class WPEvents
         wp_register_script(
             'wpe-admin-events-js',
             "{$this->url}/build/events.js",
-            array( 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-compose', 'wp-components', 'wp-data', 'wp-blocks', 'wp-i18n', 'wp-editor' )
+            array( 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-compose', 'wp-components', 'wp-data', 'wp-blocks', 'wp-i18n', 'wp-editor', 'wp-i18n' )
         );
     }
 
@@ -68,6 +73,7 @@ class WPEvents
         if( $screen && $screen->post_type === 'event' ){
             wp_enqueue_script( 'wpe-admin-events-js' );
             wp_enqueue_style( 'wpe-admin-events-css' );
+            wp_set_script_translations( 'wpe-admin-events-js', 'wpe-events' );
         }
 
     }
@@ -76,8 +82,7 @@ class WPEvents
      * Fire only once, when plugin is activated
      */
     public function plugin_activate(){
-        $mnemStorage = new WPEventsDB();
-        $mnemStorage->initialize();
+        $this->eventDBClass->initialize();
     }
 
     /**

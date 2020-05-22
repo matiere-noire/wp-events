@@ -10,9 +10,12 @@ Author URI: https://github.com/matiere-noire/
 
 namespace Events;
 
+require_once plugin_dir_path( __FILE__ ) . '/functions.php';
+
 if( file_exists( plugin_dir_path( __FILE__ ) . '/vendor/autoload.php' ) ){
     require plugin_dir_path( __FILE__ ) . '/vendor/autoload.php';
 }
+
 
 $wpevents = new WPEvents();
 $wpevents->initialize( __FILE__ );

@@ -40,7 +40,6 @@ const store = registerStore('wpe/event-date', {
 
     if (action.date) {
       const updateDateIndex = newDates.findIndex(function(element) {
-        console.log('find index', element)
         return element.id === action.date.id
       })
 
@@ -107,7 +106,6 @@ const store = registerStore('wpe/event-date', {
     *getDates(eventID) {
       const path = `/wpe/v1/dates?event_id=${eventID}`
       const dates = yield actions.fetchFromAPI(path)
-      console.log('resolver', dates)
       dates.forEach(date => {
         dispatch('wpe/event-date').addDate({
           startDate: new Date(date.wpe_date_start),
