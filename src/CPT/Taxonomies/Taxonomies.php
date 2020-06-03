@@ -22,7 +22,7 @@ abstract class Taxonomies
     public function init()
     {
 
-        add_action('init', array( $this, 'register_taxonomy' ));
+        $this->register_taxonomy();
         add_filter('term_updated_messages', array( $this, 'updated_messages' ));
     }
 

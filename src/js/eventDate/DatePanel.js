@@ -10,7 +10,7 @@ import uuid from 'uuid/v4'
 import DateDetails from './DateDetails'
 import AddDateModal from './AddDateModal'
 
-const DatePanel = ({ dates, deleteDate }) => {
+const DatePanel = ({ dates, deleteDate, places }) => {
   const [dateOpen, setDateOpen] = useState(false)
   const [currentEditDate, setCurrentEditDate] = useState({})
 
@@ -42,9 +42,9 @@ const DatePanel = ({ dates, deleteDate }) => {
         </Button>
       </PanelRow>
       {dates.map(mapDate => {
-        return <DateDetails date={mapDate} editDate={date => editDate(date)} deleteDate={date => deleteDate(date)} allPlaces={[]} />
+        return <DateDetails key={`date-${mapDate.id}`} date={mapDate} editDate={date => editDate(date)} deleteDate={date => deleteDate(date)} allPlaces={places} />
       })}
-      {dateOpen && <AddDateModal closeModal={() => setDateOpen(false)} currentEditDate={currentEditDate} allPlaces={[]} />}
+      {dateOpen && <AddDateModal closeModal={() => setDateOpen(false)} currentEditDate={currentEditDate} allPlaces={places} />}
     </Fragment>
   )
 }
@@ -54,8 +54,11 @@ export default compose([
     const eventId = select('core/editor').getCurrentPostId()
     const { getDates } = select('wpe/event-date')
 
+    const places = select('core').getEntityRecords('taxonomy', 'place', {per_page: 100})
+
     return {
-      dates: eventId ? getDates(eventId) : []
+      dates: eventId ? getDates(eventId) : [],
+      places
     }
   }),
   withDispatch(dispatch => {

@@ -14,7 +14,7 @@ class Season extends Taxonomies
 
         $this->name = 'season';
 
-        $this->post_types = [ 'event' ];
+        $this->post_types = [ apply_filters( 'wpe/event_post_type_name', 'event' ) ];
 
         $this->labels = array(
             'name'                       => __( 'Saisons', 'wpe' ),

@@ -98,6 +98,9 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
       })
   }
 
+  const placesOption = allPlaces.map( p => { return {value: p.id, label: p.name }})
+  placesOption.push( { value: null, label: 'Choisissez une salle test' } )
+
   return (
     <Modal title={__('Date details')} onRequestClose={() => closeModal()} shouldCloseOnClickOutside={false}>
       {apiError && <div className="error-message">{apiError}</div>}
@@ -127,15 +130,14 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
         />
       </PanelRow>
 
-      {/*<div style={{ borderBottom: '1px dotted #000', paddingBottom: '1em', marginBottom: '2em' }}>*/}
-      {/*  <h2>Salle</h2>*/}
-      {/*  <SelectControl*/}
-      {/*    label=""*/}
-      {/*    value={currentDate.place ? currentDate.place : null}*/}
-      {/*    onChange={place => addPlace(place)}*/}
-      {/*    options={[{ value: null, label: 'Choisissez une salle test' }, ...allPlaces]}*/}
-      {/*  />*/}
-      {/*</div>*/}
+      <PanelRow>
+        <SelectControl
+          label="Salle"
+          value={currentDate.place ? currentDate.place : null}
+          onChange={place => addPlace(place)}
+          options={placesOption}
+        />
+      </PanelRow>
 
       <Button
         isPrimary

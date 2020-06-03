@@ -7,7 +7,7 @@ class Event extends PostTypes{
     public function __construct()
     {
 
-        $this->cpt_name = 'event';
+        $this->cpt_name = apply_filters( 'wpe/event_post_type_name', 'event' );
 
         $this->labels = array(
             'name'                  => __( 'Evénements', 'wpe' ),

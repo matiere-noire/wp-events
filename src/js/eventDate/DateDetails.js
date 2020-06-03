@@ -4,10 +4,11 @@ const { __, sprintf } = wp.i18n
 const { PanelRow, Modal, Button, Card, CardHeader, CardBody, CardFooter, Icon } = wp.components
 import { chevronUp, chevronDown } from '@wordpress/icons'
 
-const DateDetails = ({ date, editDate, deleteDate }) => {
+const DateDetails = ({ date, editDate, deleteDate, allPlaces }) => {
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [bodyOpen, setBodyOpen] = useState(true)
 
+  const place = date.place && allPlaces && allPlaces.find( p => p.id === parseInt( date.place, 10 ))
   return (
     <PanelRow>
       <Card size="extraSmall" style={{ width: '100%' }}>
@@ -24,9 +25,15 @@ const DateDetails = ({ date, editDate, deleteDate }) => {
                 <span>{__('Start')}</span>
                 <span>{dateFormat(date.startDate)}</span>
               </PanelRow>
+
               <PanelRow>
                 <span>{__('End')}</span>
                 <span>{dateFormat(date.endDate)}</span>
+              </PanelRow>
+
+              <PanelRow>
+                <span>{__('Place')}</span>
+                <span>{place && place.name}</span>
               </PanelRow>
             </CardBody>
             <CardFooter style={{ display: 'flex', justifyContent: 'space-between' }}>

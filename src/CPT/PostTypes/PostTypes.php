@@ -14,7 +14,7 @@ abstract class PostTypes
     public function init()
     {
 
-        add_action('init', array( $this, 'register_post_type' ));
+        $this->register_post_type();
         add_filter('post_updated_messages', array( $this, 'updated_messages' ));
 
         add_filter("manage_{$this->cpt_name}_posts_columns", array( $this, 'manage_admin_columns' ));

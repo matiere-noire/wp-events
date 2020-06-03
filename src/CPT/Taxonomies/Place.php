@@ -14,7 +14,7 @@ class Place extends Taxonomies
 
         $this->name = 'place';
 
-        $this->post_types = [ 'event' ];
+        $this->post_types = [ apply_filters( 'wpe/event_post_type_name', 'event' ) ];
 
         $this->labels = array(
             'name'                       => __( 'Lieux/Salles', 'wpe' ),

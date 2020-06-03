@@ -38,7 +38,7 @@ class WPEvents
         $this->url      = plugin_dir_url( $file );
         $this->slug     = dirname( $this->basename );
 
-        $this->register_cpts();
+        add_action( 'init', array( $this, 'register_cpts') );
         $this->register_routes();
         $this->eventDBClass = new WPEventsDB();
 
@@ -70,7 +70,7 @@ class WPEvents
 
         $screen = get_current_screen();
 
-        if( $screen && $screen->post_type === 'event' ){
+        if( $screen && $screen->post_type === apply_filters( 'wpe/event_post_type_name', 'event' ) ){
             wp_enqueue_script( 'wpe-admin-events-js' );
             wp_enqueue_style( 'wpe-admin-events-css' );
             wp_set_script_translations( 'wpe-admin-events-js', 'wpe-events' );
