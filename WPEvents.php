@@ -10,14 +10,20 @@ Author URI: https://github.com/matiere-noire/
 
 namespace Events;
 
-require_once plugin_dir_path( __FILE__ ) . '/functions.php';
+use Events\Classes\WPQueryEventsFilters;
 
-if( file_exists( plugin_dir_path( __FILE__ ) . '/vendor/autoload.php' ) ){
-    require plugin_dir_path( __FILE__ ) . '/vendor/autoload.php';
+require_once plugin_dir_path(__FILE__) . '/functions.php';
+
+if (file_exists(plugin_dir_path(__FILE__) . '/vendor/autoload.php')) {
+    require plugin_dir_path(__FILE__) . '/vendor/autoload.php';
 }
 
 
 $wpevents = new WPEvents();
-$wpevents->initialize( __FILE__ );
+$wpevents->initialize(__FILE__);
 
-register_activation_hook( __FILE__, array( $wpevents, 'plugin_activate' ) );
+$WPQueryEventsFilters = new WPQueryEventsFilters();
+$WPQueryEventsFilters->init();
+
+
+register_activation_hook(__FILE__, array( $wpevents, 'plugin_activate' ));
