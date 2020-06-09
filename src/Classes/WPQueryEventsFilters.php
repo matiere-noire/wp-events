@@ -53,10 +53,38 @@ class WPQueryEventsFilters
      */
     public function whereDate($where, $wp_query)
     {
-        global $wpdb;
-
         if (isset($wp_query->query['wpe_date_query'])) {
-            $date_query = new WP_Date_Query($wp_query->query['wpe_date_query'], "wpe_dates.wpe_date_end");
+            $dates_query = $wp_query->query['wpe_date_query'];
+
+            foreach ($dates_query as $key => $d_query) {
+                if (isset($d_query['after'])) {
+                    if (isset($d_query['before'])) {
+                        $dates_query[$key] = [
+                            'relation'     => 'OR',
+                            $d_query,
+                            [
+                                'after'     => $d_query['after'],
+                                'before'    => $d_query['before'],
+                                'column'    => 'wpe_dates.wpe_date_end'
+                            ],
+                            [
+                                'relation'     => 'AND',
+                                [
+                                    'before'    => $d_query['before'],
+                                    'column'    => 'wpe_dates.wpe_date_start'
+                                ],[
+                                    'after'    => $d_query['after'],
+                                    'column'   => 'wpe_dates.wpe_date_end'
+                                ]
+                            ]
+                        ];
+                    } else {
+                        $dates_query[$key]['column'] = 'wpe_dates.wpe_date_end';
+                    }
+                }
+            }
+                
+            $date_query = new WP_Date_Query($dates_query, "wpe_dates.wpe_date_start");
             $where .= $date_query->get_sql();
         }
 
@@ -128,7 +156,7 @@ class WPQueryEventsFilters
             ||
             $wp_query->query['orderby'] === 'wpe_date'
             ) {
-                $orderBy = str_replace("{$wpdb->posts}.post_date", 'wpe_dates.wpe_date_end', $orderBy);
+                $orderBy = str_replace("{$wpdb->posts}.post_date", 'wpe_dates.wpe_date_start', $orderBy);
             }
         }
         return $orderBy;
@@ -160,8 +188,8 @@ class WPQueryEventsFilters
                     $posts[$key]->dates = $formatedDates;
                 } elseif (property_exists($post, 'wpe_date_start')) {
                     $posts[$key]->dates = (object) [
-                        'date_start' => $post->wpe_date_start,
-                        'date_end' => $post->wpe_date_end
+                        'date_start'    => get_date_from_gmt($post->wpe_date_start),
+                        'date_end'      => get_date_from_gmt($post->wpe_date_end)
                     ];
                 }
             }

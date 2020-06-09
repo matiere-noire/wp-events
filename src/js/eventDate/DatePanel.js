@@ -3,9 +3,11 @@ const { PanelRow, Button } = wp.components
 const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { __ } = wp.i18n
-const { apiFetch } = wp
 
 import uuid from 'uuid/v4'
+import AfterDateSlot from './AfterDateSlot'
+
+wp.wpEvent = { AfterDateSlot }
 
 import DateDetails from './DateDetails'
 import AddDateModal from './AddDateModal'
@@ -20,15 +22,15 @@ const DatePanel = ({ dates, deleteDate, places }) => {
       endDate: new Date(),
       status: 'new',
       place: '',
-      id: uuid()
+      id: uuid(),
     })
     setDateOpen(true)
   }
 
-  const editDate = date => {
+  const editDate = (date) => {
     const currentEditDate = {
       ...date,
-      status: date.status === 'new' ? 'new' : 'edit'
+      status: date.status === 'new' ? 'new' : 'edit',
     }
     setCurrentEditDate(currentEditDate)
     setDateOpen(true)
@@ -41,29 +43,38 @@ const DatePanel = ({ dates, deleteDate, places }) => {
           {__('New date')}
         </Button>
       </PanelRow>
-      {dates.map(mapDate => {
-        return <DateDetails key={`date-${mapDate.id}`} date={mapDate} editDate={date => editDate(date)} deleteDate={date => deleteDate(date)} allPlaces={places} />
+      {dates.map((mapDate) => {
+        return (
+          <DateDetails
+            key={`date-${mapDate.id}`}
+            date={mapDate}
+            editDate={(date) => editDate(date)}
+            deleteDate={(date) => deleteDate(date)}
+            allPlaces={places}
+          />
+        )
       })}
+      <AfterDateSlot.Slot />
       {dateOpen && <AddDateModal closeModal={() => setDateOpen(false)} currentEditDate={currentEditDate} allPlaces={places} />}
     </Fragment>
   )
 }
 
 export default compose([
-  withSelect(select => {
+  withSelect((select) => {
     const eventId = select('core/editor').getCurrentPostId()
     const { getDates } = select('wpe/event-date')
 
-    const places = select('core').getEntityRecords('taxonomy', 'place', {per_page: 100})
+    const places = select('core').getEntityRecords('taxonomy', 'place', { per_page: 100 })
 
     return {
       dates: eventId ? getDates(eventId) : [],
-      places
+      places,
     }
   }),
-  withDispatch(dispatch => {
+  withDispatch((dispatch) => {
     return {
-      deleteDate: date => dispatch('wpe/event-date').deleteDate(date)
+      deleteDate: (date) => dispatch('wpe/event-date').deleteDate(date),
     }
-  })
+  }),
 ])(DatePanel)
