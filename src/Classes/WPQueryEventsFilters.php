@@ -53,8 +53,8 @@ class WPQueryEventsFilters
      */
     public function whereDate($where, $wp_query)
     {
-        if (isset($wp_query->query['wpe_date_query'])) {
-            $dates_query = $wp_query->query['wpe_date_query'];
+        if (isset($wp_query->query_vars['wpe_date_query'])) {
+            $dates_query = $wp_query->query_vars['wpe_date_query'];
 
             foreach ($dates_query as $key => $d_query) {
                 if (isset($d_query['after'])) {
@@ -151,10 +151,10 @@ class WPQueryEventsFilters
     public function orderByDates($orderBy, $wp_query)
     {
         global $wpdb;
-        if (isset($wp_query->query['orderby'])) {
-            if ((is_array($wp_query->query['orderby']) && in_array('wpe_date', $wp_query->query['orderby']) )
+        if (isset($wp_query->query_vars['orderby'])) {
+            if ((is_array($wp_query->query_vars['orderby']) && in_array('wpe_date', $wp_query->query_vars['orderby']) )
             ||
-            $wp_query->query['orderby'] === 'wpe_date'
+            $wp_query->query_vars['orderby'] === 'wpe_date'
             ) {
                 $orderBy = str_replace("{$wpdb->posts}.post_date", 'wpe_dates.wpe_date_start', $orderBy);
             }
@@ -206,7 +206,7 @@ class WPQueryEventsFilters
     private function areDatesFieldsConcatened($wp_query)
     {
 
-        return ! isset($wp_query->query['wpe_date_query']);
+        return ! ( isset($wp_query->query_vars['wpe_date_query']) || $wp_query->query_vars['orderby'] === 'wpe_date' );
     }
 
     /**
@@ -216,9 +216,24 @@ class WPQueryEventsFilters
      */
     private function isQueryEvents($wp_query) : bool
     {
-        if (isset($wp_query->query['post_type'])) {
-            $post_type = $wp_query->query['post_type'];
+
+        if (
+            ( isset($wp_query->query_vars['post_type']) && ! empty( $wp_query->query_vars['post_type']))
+            ||
+            ( isset($wp_query->query_vars['taxonomy']) && ! empty( $wp_query->query_vars['taxonomy']))
+        ) {
+
+            if( empty( $wp_query->query_vars['post_type']) ){
+
+                $taxonomy = $wp_query->query_vars['taxonomy'];
+                $tax = get_taxonomy( $taxonomy );
+                $post_type = $tax->object_type;
+            } else {
+                $post_type = $wp_query->query_vars['post_type'];
+            }
+
             $cpt_name = apply_filters('wpe/event_post_type_name', 'event');
+
 
             if (is_array($post_type)) {
                 return in_array($cpt_name, $post_type);

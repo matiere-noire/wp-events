@@ -36,8 +36,7 @@ class CustomPostTypesAndTax
     {
 
         $taxos = [
-            new Taxonomies\Place(),
-            new Taxonomies\Season(),
+            new Taxonomies\Place()
         ];
 
         foreach ($taxos as $taxo) {
