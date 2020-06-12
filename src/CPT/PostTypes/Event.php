@@ -64,7 +64,7 @@ class Event extends PostTypes
         if ($column === 'wpe_date') {
             $event = get_post($post_id);
 
-            if (property_exists($event, 'dates')) {
+            if (property_exists($event, 'dates') && $event->dates ) {
                 echo '<ul>';
                 foreach ($event->dates as $d) {
                     echo "<li>{$d->date_start}</li>";

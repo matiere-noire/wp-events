@@ -177,7 +177,7 @@ class WPQueryEventsFilters
 
         foreach ($posts as $key => $post) {
             if ($post->post_type === $cpt_name) {
-                if (property_exists($post, 'dates')) {
+                if (property_exists($post, 'dates') && $post->dates) {
                     $dates = json_decode($post->dates);
                     $formatedDates = [];
                     foreach ($dates as $d) {
