@@ -1,0 +1,306 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Events\n"
+"POT-Creation-Date: 2020-06-26 11:04+0200\n"
+"PO-Revision-Date: 2020-06-26 11:04+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.3.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: WPEvents.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
+
+#: build/events.js:5925 src/js/eventDate/AddDateModal.js:104
+msgid "Choose a place"
+msgstr "Choisissez un lieu"
+
+#: build/events.js:5928 src/js/eventDate/AddDateModal.js:107
+msgid "Date details"
+msgstr "Détails de la date"
+
+#: build/events.js:5935 src/js/eventDate/AddDateModal.js:111
+msgid "Start date"
+msgstr "Date de début"
+
+#: build/events.js:5960
+msgid "End date"
+msgstr "Date de fin"
+
+#: build/events.js:5986 build/events.js:6121 src/js/eventDate/DateDetails.js:35
+msgid "Place"
+msgstr "Lieux"
+
+#: build/events.js:6002
+msgid "Save the date"
+msgstr ""
+
+#: build/events.js:6121 src/js/eventDate/DateDetails.js:25
+msgid "Start"
+msgstr "Début"
+
+#: build/events.js:6121 src/js/eventDate/DateDetails.js:30
+msgid "End"
+msgstr "Fin"
+
+#: build/events.js:6131 src/js/eventDate/DateDetails.js:41
+msgid "Edit"
+msgstr ""
+
+#: build/events.js:6136 src/js/eventDate/DateDetails.js:44
+msgid "Delete"
+msgstr "Supprimer"
+
+#: build/events.js:6137 src/js/eventDate/DateDetails.js:51
+msgid "Delete date"
+msgstr "Supprimer la date"
+
+#: build/events.js:6141 src/js/eventDate/DateDetails.js:52
+#, javascript-format
+msgid "Are you sure you want to delete the date \"%s\""
+msgstr "Etes vous sur de vouloir supprimer cette date « %s »"
+
+#: build/events.js:6146 src/js/eventDate/DateDetails.js:54
+msgid "Cancel"
+msgstr "Annulé"
+
+#: build/events.js:6152 src/js/eventDate/DateDetails.js:63
+msgid "Confirm delete date"
+msgstr "Confirmer suppression de date"
+
+#: build/events.js:6246 src/js/eventDate/DatePanel.js:43
+msgid "New date"
+msgstr "Nouvelle date"
+
+#: build/events.js:6313 src/CPT/PostTypes/Event.php:37
+#: src/js/eventDate/index.js:9
+msgid "Dates"
+msgstr "Dates"
+
+#: src/CPT/PostTypes/Event.php:14
+msgid "Events"
+msgstr "Événements"
+
+#: src/CPT/PostTypes/Event.php:15
+msgid "Event"
+msgstr "Evénement"
+
+#: src/CPT/PostTypes/Event.php:16
+msgid "All events"
+msgstr "Tous les événements"
+
+#: src/CPT/PostTypes/Event.php:17
+msgid "Archives Events"
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/CPT/PostTypes/Event.php:65
+#, php-format
+msgid "Event modifié. <a target=\"_blank\" href=\"%s\">Voir event</a>"
+msgstr ""
+
+#: src/CPT/PostTypes/Event.php:66
+msgid "Custom field updated."
+msgstr ""
+
+#: src/CPT/PostTypes/Event.php:67
+msgid "Custom field deleted."
+msgstr ""
+
+#: src/CPT/PostTypes/Event.php:68
+msgid "Event modifié."
+msgstr ""
+
+#. translators: %s: date and time of the revision
+#: src/CPT/PostTypes/Event.php:70
+#, php-format
+msgid "Event restauré à partir de %s"
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/CPT/PostTypes/Event.php:72
+#, php-format
+msgid "Event publié. <a href=\"%s\">Voir l'event</a>"
+msgstr ""
+
+#: src/CPT/PostTypes/Event.php:73
+msgid "Event sauvegardé."
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/CPT/PostTypes/Event.php:75
+#, php-format
+msgid "Event soumis. <a target=\"_blank\" href=\"%s\">Prévisualiser event</a>"
+msgstr ""
+
+#: src/CPT/PostTypes/Event.php:78
+#, php-format
+msgid ""
+"Event prévu pour: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Prévisualiser event</a>"
+msgstr ""
+
+#: src/CPT/PostTypes/Event.php:79
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#. translators: %s: post permalink
+#: src/CPT/PostTypes/Event.php:83
+#, php-format
+msgid ""
+"Event brouillon modifié. <a target=\"_blank\" href=\"%s\">Prévisualiser "
+"event</a>"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:20 src/CPT/Taxonomies/Place.php:37
+msgid "Lieux/Salles"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:21
+msgctxt "taxonomy general name"
+msgid "Lieu"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:22
+msgid "Chercher lieux"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:23
+msgid "Lieux populaires"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:24
+msgid "Tous les lieux"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:25
+msgid "Lieu parent"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:26
+msgid "Lieu parent:"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:27
+msgid "Editer le lieu"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:28
+msgid "Mettre à jour le lieu"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:29
+msgid "Voir le lieu"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:30 src/CPT/Taxonomies/Place.php:31
+msgid "Nouveau lieu"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:32
+msgid "Séparer les lieux avec des virgules"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:33
+msgid "Ajouter ou supprimer des lieux"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:34
+msgid "Choisir parmi les lieux les plus utilisés"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:35
+msgid "Pas de lieu trouvé."
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:36
+msgid "Pas de lieu"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:38
+msgid "Lieux liste navigation"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:39
+msgid "Lieux liste"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:40
+msgctxt "place"
+msgid "Les plus utilisés"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:41
+msgid "&larr; Retour aux Lieux"
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:61
+msgid "Lieu ajouté."
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:62
+msgid "Lieu supprimé."
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:63
+msgid "Lieu mis à jour."
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:64
+msgid "Lieu non ajouté."
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:65
+msgid "Lieu non mis à jour."
+msgstr ""
+
+#: src/CPT/Taxonomies/Place.php:66
+msgid "Lieux supprimés."
+msgstr ""
+
+#: src/Rest/RestDates.php:130
+#, php-format
+msgid "Invalid event ID : %s"
+msgstr ""
+
+#: src/Rest/RestDates.php:140
+#, php-format
+msgid "Invalid event type : %s"
+msgstr ""
+
+#: src/Rest/RestDates.php:203
+msgid " row(s) affected"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: src/WPEvents.php:34
+msgid "WP Events"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://github.com/matiere-noire/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Gestion des événements"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Matière Noire"
+msgstr ""
+
+#~ msgid "Evénement"
+#~ msgstr "Évènement"

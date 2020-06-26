@@ -73,7 +73,7 @@ class WPEvents
         if( $screen && $screen->post_type === apply_filters( 'wpe/event_post_type_name', 'event' ) ){
             wp_enqueue_script( 'wpe-admin-events-js' );
             wp_enqueue_style( 'wpe-admin-events-css' );
-            wp_set_script_translations( 'wpe-admin-events-js', 'wpe-events' );
+            wp_set_script_translations( 'wpe-admin-events-js', 'mn-wp-events', $this->path . 'languages' );
         }
 
     }

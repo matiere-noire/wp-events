@@ -40,7 +40,7 @@ const DatePanel = ({ dates, deleteDate, places }) => {
     <Fragment>
       <PanelRow>
         <Button isDefault onClick={() => newDate()}>
-          {__('New date')}
+          {__('New date', 'mn-wp-events')}
         </Button>
       </PanelRow>
       {dates.map((mapDate) => {

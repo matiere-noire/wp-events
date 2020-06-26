@@ -11,31 +11,10 @@ class Event extends PostTypes
         $this->cpt_name = apply_filters('wpe/event_post_type_name', 'event');
 
         $this->labels = array(
-            'name'                  => __('Evénements', 'wpe'),
-            'singular_name'         => __('Evénement', 'wpe'),
-            'all_items'             => __('Tous les événements', 'wpe'),
-            'archives'              => __('Evénements Archives', 'wpe'),
-            'attributes'            => __('Evénements Attributs', 'wpe'),
-            'insert_into_item'      => __('Inserer dans événement', 'wpe'),
-            'uploaded_to_this_item' => __('Mettre à jour pour cet événement', 'wpe'),
-            'featured_image'        => _x('Image mise en avant', 'event', 'wpe'),
-            'set_featured_image'    => _x('Mettre une image en avant', 'event', 'wpe'),
-            'remove_featured_image' => _x('Supprimer l\'image mise en avant', 'event', 'wpe'),
-            'use_featured_image'    => _x('Utiliser comme image mise en avant', 'event', 'wpe'),
-            'filter_items_list'     => __('Filtrer la liste d\'événements', 'wpe'),
-            'items_list_navigation' => __('Navigation de la liste d\'événements', 'wpe'),
-            'items_list'            => __('Liste des événements', 'wpe'),
-            'new_item'              => __('Nouvel événement', 'wpe'),
-            'add_new'               => __('Ajouter un nouveau', 'wpe'),
-            'add_new_item'          => __('Ajouter un nouvel événement', 'wpe'),
-            'edit_item'             => __('Editer événement', 'wpe'),
-            'view_item'             => __('Voir l\'événement', 'wpe'),
-            'view_items'            => __('Voir les événements', 'wpe'),
-            'search_items'          => __('Chercher événements', 'wpe'),
-            'not_found'             => __('Pas d\'événements trouvés', 'wpe'),
-            'not_found_in_trash'    => __('Pas d\'événements trouvés dans la corbeille', 'wpe'),
-            'parent_item_colon'     => __('Evénement parent:', 'wpe'),
-            'menu_name'             => __('Evénements', 'wpe'),
+            'name'                  => __('Events', 'mn-wp-events'),
+            'singular_name'         => __('Event', 'mn-wp-events'),
+            'all_items'             => __('All events', 'mn-wp-events'),
+            'archives'              => __('Archives Events', 'mn-wp-events'),
         );
 
         $this->args = array(
@@ -55,13 +34,13 @@ class Event extends PostTypes
 
     public function manage_admin_columns($columns)
     {
-        $columns['wpe_date'] = __('Dates');
+        $columns['mn-wp-events_date'] = __('Dates');
         return $columns;
     }
 
     public function manage_admin_custom_column($column, $post_id)
     {
-        if ($column === 'wpe_date') {
+        if ($column === 'mn-wp-events_date') {
             $event = get_post($post_id);
 
             if (property_exists($event, 'dates') && $event->dates ) {
@@ -83,25 +62,25 @@ class Event extends PostTypes
         $messages['event'] = array(
             0  => '', // Unused. Messages start at index 1.
             /* translators: %s: post permalink */
-            1  => sprintf(__('Evénement modifié. <a target="_blank" href="%s">Voir événement</a>', 'wpe'), esc_url($permalink)),
-            2  => __('Custom field updated.', 'wpe'),
-            3  => __('Custom field deleted.', 'wpe'),
-            4  => __('Evénement modifié.', 'wpe'),
+            1  => sprintf(__('Event modifié. <a target="_blank" href="%s">Voir event</a>', 'mn-wp-events'), esc_url($permalink)),
+            2  => __('Custom field updated.', 'mn-wp-events'),
+            3  => __('Custom field deleted.', 'mn-wp-events'),
+            4  => __('Event modifié.', 'mn-wp-events'),
             /* translators: %s: date and time of the revision */
-            5  => isset($_GET['revision']) ? sprintf(__('Evénement restauré à partir de %s', 'wpe'), wp_post_revision_title((int) $_GET['revision'], false)) : false,
+            5  => isset($_GET['revision']) ? sprintf(__('Event restauré à partir de %s', 'mn-wp-events'), wp_post_revision_title((int) $_GET['revision'], false)) : false,
             /* translators: %s: post permalink */
-            6  => sprintf(__('Evénement publié. <a href="%s">Voir l\'événement</a>', 'wpe'), esc_url($permalink)),
-            7  => __('Evénement sauvegardé.', 'wpe'),
+            6  => sprintf(__('Event publié. <a href="%s">Voir l\'event</a>', 'mn-wp-events'), esc_url($permalink)),
+            7  => __('Event sauvegardé.', 'mn-wp-events'),
             /* translators: %s: post permalink */
-            8  => sprintf(__('Evénement soumis. <a target="_blank" href="%s">Prévisualiser événement</a>', 'wpe'), esc_url(add_query_arg('preview', 'true', $permalink))),
+            8  => sprintf(__('Event soumis. <a target="_blank" href="%s">Prévisualiser event</a>', 'mn-wp-events'), esc_url(add_query_arg('preview', 'true', $permalink))),
             /* translators: 1: Publish box date format, see https://secure.php.net/date 2: Post permalink */
             9  => sprintf(
-                __('Evénement prévu pour: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Prévisualiser événement</a>', 'wpe'),
+                __('Event prévu pour: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Prévisualiser event</a>', 'mn-wp-events'),
                 date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date)),
                 esc_url($permalink)
             ),
             /* translators: %s: post permalink */
-            10 => sprintf(__('Evénement brouillon modifié. <a target="_blank" href="%s">Prévisualiser événement</a>', 'wpe'), esc_url(add_query_arg('preview', 'true', $permalink))),
+            10 => sprintf(__('Event brouillon modifié. <a target="_blank" href="%s">Prévisualiser event</a>', 'mn-wp-events'), esc_url(add_query_arg('preview', 'true', $permalink))),
         );
 
         return $messages;

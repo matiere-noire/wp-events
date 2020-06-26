@@ -8,7 +8,7 @@ const DateDetails = ({ date, editDate, deleteDate, allPlaces }) => {
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [bodyOpen, setBodyOpen] = useState(true)
 
-  const place = date.place && allPlaces && allPlaces.find( p => p.id === parseInt( date.place, 10 ))
+  const place = date.place && allPlaces && allPlaces.find((p) => p.id === parseInt(date.place, 10))
   return (
     <PanelRow>
       <Card size="extraSmall" style={{ width: '100%' }}>
@@ -22,17 +22,17 @@ const DateDetails = ({ date, editDate, deleteDate, allPlaces }) => {
           <>
             <CardBody>
               <PanelRow>
-                <span>{__('Start')}</span>
+                <span>{__('Start', 'mn-wp-events')}</span>
                 <span>{dateFormat(date.startDate)}</span>
               </PanelRow>
 
               <PanelRow>
-                <span>{__('End')}</span>
+                <span>{__('End', 'mn-wp-events')}</span>
                 <span>{dateFormat(date.endDate)}</span>
               </PanelRow>
 
               <PanelRow>
-                <span>{__('Place')}</span>
+                <span>{__('Place', 'mn-wp-events')}</span>
                 <span>{place && place.name}</span>
               </PanelRow>
             </CardBody>
@@ -41,17 +41,17 @@ const DateDetails = ({ date, editDate, deleteDate, allPlaces }) => {
                 {__('Edit')}
               </Button>
               <Button isDestructive onClick={() => setConfirmOpen(true)}>
-                {__('Delete')}
+                {__('Delete', 'mn-wp-events')}
               </Button>
             </CardFooter>
           </>
         )}
       </Card>
       {confirmOpen && (
-        <Modal title={__('Delete date')} onRequestClose={() => setConfirmOpen(false)}>
-          <p>{sprintf(__('Are you sure you want to delete the date "%s"'), dateFormat(date.startDate))}</p>
+        <Modal title={__('Delete date', 'mn-wp-events')} onRequestClose={() => setConfirmOpen(false)}>
+          <p>{sprintf(__('Are you sure you want to delete the date "%s"', 'mn-wp-events'), dateFormat(date.startDate))}</p>
           <Button isDefault onClick={() => setConfirmOpen(false)}>
-            {__('Cancel')}
+            {__('Cancel', 'mn-wp-events')}
           </Button>
           <Button
             isPrimary
@@ -60,7 +60,7 @@ const DateDetails = ({ date, editDate, deleteDate, allPlaces }) => {
               deleteDate(date)
             }}
           >
-            {__('Confirm delete date')}
+            {__('Confirm delete date', 'mn-wp-events')}
           </Button>
         </Modal>
       )}

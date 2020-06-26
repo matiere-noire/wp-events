@@ -6,6 +6,8 @@ Description: Gestion des événements
 Author: Matière Noire
 Version: 0.1
 Author URI: https://github.com/matiere-noire/
+Text Domain: mn-wp-events
+Domain Path: /languages
 */
 
 namespace Events;
@@ -27,3 +29,9 @@ $WPQueryEventsFilters->init();
 
 
 register_activation_hook(__FILE__, array( $wpevents, 'plugin_activate' ));
+
+add_action( 'plugins_loaded', 'Events\wp_event_load_plugin_textdomain' );
+
+function wp_event_load_plugin_textdomain() {
+    load_plugin_textdomain( 'mn-wp-events', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+}

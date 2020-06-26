@@ -13,14 +13,14 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
   const [apiError, setApiError] = useState(null)
   const [apiFetching, setApiFetching] = useState(false)
 
-  const addPlace = p => {
+  const addPlace = (p) => {
     setCurrentDate({
       ...currentDate,
-      place: p
+      place: p,
     })
   }
 
-  const changeCurrentEditStartDate = date => {
+  const changeCurrentEditStartDate = (date) => {
     const start = new Date(date.date)
     const newDate = { ...currentDate }
     if (start > currentDate.endDate) {
@@ -30,7 +30,7 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
     setCurrentDate(newDate)
   }
 
-  const changeCurrentEditEndDate = date => {
+  const changeCurrentEditEndDate = (date) => {
     const end = new Date(date.date)
     const newDate = { ...currentDate }
     if (end < currentDate.startDate) {
@@ -48,7 +48,7 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
           date_start: currentDate.startDate,
           date_end: currentDate.endDate,
           event_id: eventId,
-          place_id: currentDate.place
+          place_id: currentDate.place,
         }
         break
       case 'edit':
@@ -57,7 +57,7 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
           date_end: currentDate.endDate,
           event_id: eventId,
           place_id: currentDate.place,
-          id: currentDate.id
+          id: currentDate.id,
         }
         break
       case 'saved':
@@ -76,9 +76,9 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
     apiFetch({
       path: `/wpe/v1/dates${date.id ? '/' + date.id : ''}`,
       method: date.id ? 'PUT' : 'POST',
-      data: date
+      data: date,
     })
-      .then(response => {
+      .then((response) => {
         // We add data to store and close the modal
         let dateStore = { ...currentDate, status: 'saved' }
         const dateId = +response
@@ -92,21 +92,23 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
         setApiFetching(false)
         closeModal()
       })
-      .catch(error => {
+      .catch((error) => {
         setApiError(error.message)
         setApiFetching(false)
       })
   }
 
-  const placesOption = allPlaces.map( p => { return {value: p.id, label: p.name }})
-  placesOption.push( { value: null, label: 'Choisissez une salle test' } )
+  const placesOption = allPlaces.map((p) => {
+    return { value: p.id, label: p.name }
+  })
+  placesOption.unshift({ value: null, label: __('Choose a place', 'mn-wp-events') })
 
   return (
-    <Modal title={__('Date details')} onRequestClose={() => closeModal()} shouldCloseOnClickOutside={false}>
+    <Modal title={__('Date details', 'mn-wp-events')} onRequestClose={() => closeModal()} shouldCloseOnClickOutside={false}>
       {apiError && <div className="error-message">{apiError}</div>}
 
       <PanelRow>
-        <span>{__('Start date')}</span>
+        <span>{__('Start date', 'mn-wp-events')}</span>
         <Dropdown
           position="bottom right"
           renderToggle={({ isOpen, onToggle }) => (
@@ -114,11 +116,13 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
               {`${currentDate.startDate.toLocaleDateString(undefined, { hour: '2-digit', minute: '2-digit' })}`}
             </Button>
           )}
-          renderContent={() => <DateTimePicker currentDate={currentDate.startDate} onChange={date => changeCurrentEditStartDate({ date })} is12Hour={false} />}
+          renderContent={() => (
+            <DateTimePicker currentDate={currentDate.startDate} onChange={(date) => changeCurrentEditStartDate({ date })} is12Hour={false} />
+          )}
         />
       </PanelRow>
       <PanelRow>
-        <span>{__('End date')}</span>
+        <span>{__('End date', 'mn-wp-events')}</span>
         <Dropdown
           position="bottom right"
           renderToggle={({ isOpen, onToggle }) => (
@@ -126,15 +130,15 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
               {`${currentDate.endDate.toLocaleDateString(undefined, { hour: '2-digit', minute: '2-digit' })}`}
             </Button>
           )}
-          renderContent={() => <DateTimePicker currentDate={currentDate.endDate} onChange={date => changeCurrentEditEndDate({ date })} is12Hour={false} />}
+          renderContent={() => <DateTimePicker currentDate={currentDate.endDate} onChange={(date) => changeCurrentEditEndDate({ date })} is12Hour={false} />}
         />
       </PanelRow>
 
       <PanelRow>
         <SelectControl
-          label="Salle"
+          label={__('Place', 'mn-wp-events')}
           value={currentDate.place ? currentDate.place : null}
-          onChange={place => addPlace(place)}
+          onChange={(place) => addPlace(place)}
           options={placesOption}
         />
       </PanelRow>
@@ -148,21 +152,21 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
         isBusy={apiFetching}
         disabled={apiFetching}
       >
-        {__('Save the date')}
+        {__('Save the date', 'mn-wp-events')}
       </Button>
     </Modal>
   )
 }
 
 export default compose([
-  withSelect(select => {
+  withSelect((select) => {
     return {
-      eventId: select('core/editor').getCurrentPostId()
+      eventId: select('core/editor').getCurrentPostId(),
     }
   }),
-  withDispatch(dispatch => {
+  withDispatch((dispatch) => {
     return {
-      addDate: date => dispatch('wpe/event-date').addDate(date)
+      addDate: (date) => dispatch('wpe/event-date').addDate(date),
     }
-  })
+  }),
 ])(AddDateModal)
