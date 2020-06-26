@@ -44,7 +44,6 @@ class WPEvents
 
         add_action( 'init', array( $this, 'register_scripts') );
         add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets') );
-        add_action( 'admin_menu', array( $this, 'admin_menu_entry' ), 9 );   
     }
 
     public function register_cpts(){
@@ -84,24 +83,4 @@ class WPEvents
     public function plugin_activate(){
         $this->eventDBClass->initialize();
     }
-
-    /**
-     * Add page in the admin menu
-     * 
-     * https://developer.wordpress.org/reference/functions/add_menu_page/
-     */
-    public function admin_menu_entry(){
-
-        add_menu_page(  $this->name, $this->name, 'administrator', $this->normalizeName, array( $this, 'admin_menu_entry_dashboard' ), 'dashicons-calendar-alt', 26 );
-
-    }
-
-    /**
-     * Display settings on a dashboard page
-     */
-    public function admin_menu_entry_dashboard(){
-        require_once "{$this->path}/src/includes/dashboard.php";
-    }
-
-
 }
