@@ -114,7 +114,7 @@ function wpe_delete_date($date_id)
     return $wpdb->delete(
         $wpdb->wpe_dates,
         array(
-            'uto_date_id' => $date_id
+            'wpe_date_id' => $date_id
         ),
         array(
             '%d'
