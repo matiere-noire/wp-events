@@ -75,7 +75,7 @@ function wpe_update_date($args = [])
             break;
         else :
             if ($value === 'date_start' || $value === 'date_end') {
-                $params[ 'wpe_' . $value ] = get_date_from_gmt($args[ $value ]);
+                $params[ 'wpe_' . $value ] = get_gmt_from_date($args[ $value ]);
             } else {
                 $params[ 'wpe_' . $value ] = $args[ $value ];
             }

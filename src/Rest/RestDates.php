@@ -83,8 +83,8 @@ class RestDates
     {
         
         $result = wpe_insert_date([
-            'date_start' => get_date_from_gmt($request['date_start']),
-            'date_end'   => get_date_from_gmt($request['date_end']),
+            'date_start' => $request['date_start'],
+            'date_end'   => $request['date_end'],
             'event_id'   => $request['event_id'],
             'place_id'   => $request['place_id']
         ]);
