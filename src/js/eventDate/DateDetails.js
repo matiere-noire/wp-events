@@ -31,7 +31,7 @@ const DateDetails = ({ date, editDate, deleteDate, allPlaces }) => {
                 <span>{dateFormat(date.endDate)}</span>
               </PanelRow>
 
-              <PanelRow>
+              <PanelRow className={'event-place'}>
                 <span>{__('Place', 'mn-wp-events')}</span>
                 <span>{place && place.name}</span>
               </PanelRow>

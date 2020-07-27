@@ -134,7 +134,7 @@ const AddDateModal = ({ currentEditDate, eventId, closeModal, allPlaces }) => {
         />
       </PanelRow>
 
-      <PanelRow>
+      <PanelRow className={'event-place'}>
         <SelectControl
           label={__('Place', 'mn-wp-events')}
           value={currentDate.place ? currentDate.place : null}
