@@ -124,11 +124,13 @@ class WPQueryEventsFilters
         if ($this->isQueryEvents($wp_query)) {
             $groupeByArray = explode(',', $groupby);
 
-            if ($this->areDatesFieldsConcatened($wp_query) && ! in_array("{$wpdb->posts}.ID", $groupeByArray)) {
-                if (count($groupeByArray) === 1 && $groupeByArray[0] === '') {
-                    $groupeByArray = ["{$wpdb->posts}.ID"];
-                } else {
-                    $groupeByArray[] = "{$wpdb->posts}.ID";
+            if ($this->areDatesFieldsConcatened($wp_query)) {
+                if (! in_array("{$wpdb->posts}.ID", $groupeByArray)) {
+                    if (count($groupeByArray) === 1 && $groupeByArray[0] === '') {
+                        $groupeByArray = ["{$wpdb->posts}.ID"];
+                    } else {
+                        $groupeByArray[] = "{$wpdb->posts}.ID";
+                    }
                 }
             } else {
                 $groupeByArray[] = 'wpe_dates.wpe_date_id';
@@ -217,16 +219,13 @@ class WPQueryEventsFilters
     private function isQueryEvents($wp_query) : bool
     {
 
-        if (
-            ( isset($wp_query->query_vars['post_type']) && ! empty( $wp_query->query_vars['post_type']))
+        if (( isset($wp_query->query_vars['post_type']) && ! empty($wp_query->query_vars['post_type']))
             ||
-            ( isset($wp_query->query_vars['taxonomy']) && ! empty( $wp_query->query_vars['taxonomy']))
+            ( isset($wp_query->query_vars['taxonomy']) && ! empty($wp_query->query_vars['taxonomy']))
         ) {
-
-            if( empty( $wp_query->query_vars['post_type']) ){
-
+            if (empty($wp_query->query_vars['post_type'])) {
                 $taxonomy = $wp_query->query_vars['taxonomy'];
-                $tax = get_taxonomy( $taxonomy );
+                $tax = get_taxonomy($taxonomy);
                 $post_type = $tax->object_type;
             } else {
                 $post_type = $wp_query->query_vars['post_type'];
