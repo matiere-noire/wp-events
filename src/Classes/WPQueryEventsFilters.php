@@ -61,20 +61,22 @@ class WPQueryEventsFilters
                     if (isset($d_query['before'])) {
                         $dates_query[$key] = [
                             'relation'     => 'OR',
-                            $d_query,
                             [
-                                'after'     => $d_query['after'],
-                                'before'    => $d_query['before'],
-                                'column'    => 'wpe_dates.wpe_date_end'
+                                'after'             => $d_query['after'],
+                                'before'            => $d_query['before'] . ' 23:59:00',
+                                'inclusive'         => true,
+                                'column'            => 'wpe_dates.wpe_date_end'
                             ],
                             [
-                                'relation'     => 'AND',
+                                'relation'          => 'AND',
                                 [
-                                    'before'    => $d_query['before'],
-                                    'column'    => 'wpe_dates.wpe_date_start'
+                                    'before'        => $d_query['before'] . ' 23:59:00',
+                                    'inclusive'     => true,
+                                    'column'        => 'wpe_dates.wpe_date_start'
                                 ],[
-                                    'after'    => $d_query['after'],
-                                    'column'   => 'wpe_dates.wpe_date_end'
+                                    'after'         => $d_query['after'],
+                                    'inclusive'     => true,
+                                    'column'        => 'wpe_dates.wpe_date_end'
                                 ]
                             ]
                         ];
@@ -83,7 +85,7 @@ class WPQueryEventsFilters
                     }
                 }
             }
-                
+
             $date_query = new WP_Date_Query($dates_query, "wpe_dates.wpe_date_start");
             $where .= $date_query->get_sql();
         }
