@@ -239,7 +239,7 @@ class WPQueryEventsFilters
             if (is_array($post_type)) {
                 return in_array($cpt_name, $post_type);
             } elseif (is_string($post_type)) {
-                return $post_type === $cpt_name;
+                return $post_type === $cpt_name || $post_type === 'any';
             }
         }
 
