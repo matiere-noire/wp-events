@@ -48,7 +48,7 @@ class WPEventsQuery
     public function __construct($queryArgs = [])
     {
         $this->defaultQueryArgs = [
-            'post_status' => ['publish']
+            'post_status' => ['publish', 'draft']
         ];
 
         $this->setQueryArgs($queryArgs);
