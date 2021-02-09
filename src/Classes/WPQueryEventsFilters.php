@@ -156,10 +156,7 @@ class WPQueryEventsFilters
     {
         global $wpdb;
         if (isset($wp_query->query_vars['orderby'])) {
-            if ((is_array($wp_query->query_vars['orderby']) && in_array('wpe_date', $wp_query->query_vars['orderby']) )
-            ||
-            $wp_query->query_vars['orderby'] === 'wpe_date'
-            ) {
+            if ($this->isOrderByEvent($wp_query->query_vars['orderby'])) {
                 $orderBy = str_replace("{$wpdb->posts}.post_date", 'wpe_dates.wpe_date_start', $orderBy);
             }
         }
@@ -210,7 +207,7 @@ class WPQueryEventsFilters
     private function areDatesFieldsConcatened($wp_query)
     {
 
-        return ! ( isset($wp_query->query_vars['wpe_date_query']) || $wp_query->query_vars['orderby'] === 'wpe_date' );
+        return !isset($wp_query->query_vars['wpe_date_query']) || $this->isOrderByEvent($wp_query->query_vars['orderby']);
     }
 
     /**
@@ -244,5 +241,11 @@ class WPQueryEventsFilters
         }
 
         return false;
+    }
+
+    private function isOrderByEvent($orderBy)
+    {
+        return is_array($orderBy) ? in_array('wpe_date', array_keys($orderBy))
+                : strpos($orderBy, 'wpe_date') !== false;
     }
 }
