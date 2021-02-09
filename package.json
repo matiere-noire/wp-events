@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@wordpress/icons": "^2.0.0",
-    "choices.js": "^6.0.3",
     "classnames": "^2.2.6",
     "uuid": "^8.3.2"
   }
