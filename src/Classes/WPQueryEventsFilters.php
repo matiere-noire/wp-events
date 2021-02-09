@@ -207,7 +207,7 @@ class WPQueryEventsFilters
     private function areDatesFieldsConcatened($wp_query)
     {
 
-        return !isset($wp_query->query_vars['wpe_date_query']) || $this->isOrderByEvent($wp_query->query_vars['orderby']);
+        return !(isset($wp_query->query_vars['wpe_date_query']) || $this->isOrderByEvent($wp_query->query_vars['orderby'])) || is_search();
     }
 
     /**
