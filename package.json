@@ -20,7 +20,7 @@
     "test:unit": "wp-scripts test-unit-js"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^8.0.1",
+    "@wordpress/scripts": "^13.0.3",
     "sass": "^1.17.2"
   },
   "prettier": {
@@ -32,6 +32,6 @@
     "@wordpress/icons": "^2.0.0",
     "choices.js": "^6.0.3",
     "classnames": "^2.2.6",
-    "uuid": "^3.3.2"
+    "uuid": "^8.3.2"
   }
 }

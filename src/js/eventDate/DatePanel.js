@@ -4,7 +4,7 @@ const { compose } = wp.compose
 const { withSelect, withDispatch } = wp.data
 const { __ } = wp.i18n
 
-import uuid from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid'
 import AfterDateSlot from './AfterDateSlot'
 
 wp.wpEvent = { AfterDateSlot }
@@ -22,7 +22,7 @@ const DatePanel = ({ dates, deleteDate, places }) => {
       endDate: new Date(),
       status: 'new',
       place: '',
-      id: uuid(),
+      id: uuidv4(),
     })
     setDateOpen(true)
   }
