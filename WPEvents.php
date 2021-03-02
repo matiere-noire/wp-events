@@ -4,7 +4,7 @@ Plugin Name: WP Events
 Plugin URI: https://github.com/matiere-noire/
 Description: Gestion des événements
 Author: Matière Noire
-Version: 1.4.1
+Version: 1.5.2
 Author URI: https://github.com/matiere-noire/
 Text Domain: mn-wp-events
 Domain Path: /languages

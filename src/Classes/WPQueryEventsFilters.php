@@ -107,7 +107,8 @@ class WPQueryEventsFilters
         global $wpdb;
 
         if ($this->isQueryEvents($wp_query)) {
-            $join .= " LEFT JOIN {$wpdb->wpe_dates} as wpe_dates on wpe_dates.wpe_event_id = {$wpdb->posts}.ID ";
+            $leftJoin = apply_filters('wpe/event_join_table', "LEFT JOIN {$wpdb->wpe_dates} as wpe_dates on wpe_dates.wpe_event_id = {$wpdb->posts}.ID ");
+            $join .= $leftJoin;
         }
         return $join;
     }
@@ -207,7 +208,7 @@ class WPQueryEventsFilters
     private function areDatesFieldsConcatened($wp_query)
     {
 
-        return !(isset($wp_query->query_vars['wpe_date_query']) || $this->isOrderByEvent($wp_query->query_vars['orderby'])) || is_search();
+        return !(isset($wp_query->query_vars['wpe_date_query']) || $this->isOrderByEvent($wp_query->query_vars['orderby']));
     }
 
     /**
